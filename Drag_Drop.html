@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+#div1 {
+  width: 350px;
+  height: 70px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+</style>
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+    
+  localStorage.setItem("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = localStorage.getItem("text");
+  console.log(data);
+  console.log(document.getElementById(ev.currentTarget.id).innerHTML)
+  document.getElementById(ev.currentTarget.id).value =  data ;
+  document.getElementById("div1").innerHTML="Dropped :  "+ data+ "on  : "+ev.currentTarget.id;
+ // ev.target.setData()
+  ev.target.appendChild(document.getElementById(data));
+}
+</script>
+</head>
+<body>
+
+<p>Drag the items into the rectangle:</p>
+
+
+<br>
+<label id="item1" draggable="true" ondragstart="drag(event)">item1</label>
+<input type = "text" id="dropbox1" ondrop="drop(event)" ondragover="allowDrop(event)"/>
+<label id="item2" draggable="true" ondragstart="drag(event)">item2</label>
+<input type = "text" id="dropbox2" ondrop="drop(event)" ondragover="allowDrop(event)"/>
+<label id="item3" draggable="true" ondragstart="drag(event)">item3</label>
+<input type = "text" id="dropbox3" ondrop="drop(event)" ondragover="allowDrop(event)"/>
+
+
+
+
+
+<br>
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+</body>
+</html>
